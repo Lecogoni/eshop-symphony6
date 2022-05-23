@@ -1,7 +1,6 @@
 {% extends 'base.html.twig' %}
 
 {% block title %}mon compte - eshop{% endblock %}
-{% block carousel %}{% endblock %}
 
 {% block body %}
 <style>
@@ -10,9 +9,9 @@
 </style>
 
 <div class="example-wrapper">
-    <h1>Hello {{ controller_name }}! ✅</h1>
+    <h1>Hello {{ app.user.firstname }} </h1>
 
-    Salut {{ app.user.firstname }} bienvenue dans votre espace<br>
+    Bienvenue sur votre espace<br>
 
     <ul>
 
