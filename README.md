@@ -9,3 +9,8 @@
 - controller Home
 - my git config 
 - base.html.twig is modify
+
+
+### Manage Admin 
+
+- easyadmin-bundle (v4.2.2)
