@@ -2,6 +2,7 @@
 
 namespace App\Controller\Admin;
 
+use App\Entity\Category;
 use App\Entity\User;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Dashboard;
 use EasyCorp\Bundle\EasyAdminBundle\Config\MenuItem;
@@ -44,7 +45,8 @@ class DashboardController extends AbstractDashboardController
     {
         yield MenuItem::linkToDashboard('Dashboard', 'fa fa-home');
         yield MenuItem::linkToCrud('User', 'fas fa-user', User::class);
-        yield MenuItem::linkToLogout('Logout', 'fas fa-person-from-portal');
+        yield MenuItem::linkToCrud('Category', 'fa-solid fa-shirt', Category::class);
+        yield MenuItem::linkToLogout('Logout', 'fa-solid fa-right-from-bracket');
         //yield MenuItem::linkToRoute('app_register', 'fa fa-exit');
     }
 }
