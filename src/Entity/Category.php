@@ -30,6 +30,11 @@ class Category
     {
         return $this->id;
     }
+    
+    # Use to get the list of all category name in EasyAdmin Product crud
+    public function __toString(){
+        return $this->getName();
+    }
 
     public function getName(): ?string
     {
