@@ -10,24 +10,27 @@
         <!-- filter -->
         <div class="col-md-3">
             <h3>Filtrer</h3>
+            {{ form(form) }}
         </div>
 
         <!-- Products -->
         <div class="col-md-9">
             <h3>Nos Produits</h3>
-            {% for product in products %}
-                <div class="col-md-4 mb-3" style="text-align: center;">
-                    <div class="product-item">
-                        <a href="{{ path('app_product', { 'slug' : product.slug}) }}"><img src="uploads/{{product.illustration}}" class="img-fluid" style="max-height: 200px;" alt="{{product.name}}"></a>
-                        <div class="card-body">
-                            <h5 class="card-title">{{product.name}}</h5>
-                            <span>{{product.subtitle}}<span>
-                            <br>
-                            <span>{{ (product.price / 100) | number_format(2, ',', '.')}} €<span>
+            <div class="row">
+                {% for product in products %}
+                    <div class="col-md-4 mb-3" style="text-align: center;">
+                        <div class="product-item">
+                            <a href="{{ path('app_product', { 'slug' : product.slug}) }}"><img src="uploads/{{product.illustration}}" class="img-fluid" style="max-height: 200px;" alt="{{product.name}}"></a>
+                            <div class="card-body">
+                                <h5 class="card-title">{{product.name}}</h5>
+                                <span>{{product.subtitle}}<span>
+                                <br>
+                                <span>{{ (product.price / 100) | number_format(2, ',', '.')}} €<span>
+                            </div>
                         </div>
                     </div>
-                </div>
-            {% endfor %}
+                {% endfor %}
+            </div>
         </div>
         
     </div>
