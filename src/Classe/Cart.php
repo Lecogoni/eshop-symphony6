@@ -3,6 +3,7 @@
 
 namespace App\Classe;
 
+
 use Symfony\Component\HttpFoundation\RequestStack;
 
 class Cart
@@ -32,6 +33,7 @@ class Cart
             $cart[$id]++ ;
         }
 
+        // save $cart in session
         $session->set('cart', $cart);
     }
 
@@ -63,4 +65,25 @@ class Cart
         unset($cart[$id]);
         return $session->set('cart', $cart);
     }
+
+    /**
+     * delete one product in cart by id
+     */
+    public function decrease($id)
+    {
+        $session = $this->requestStack->getSession();
+        $cart = $session->get('cart');
+      
+        if ($cart[$id] > 1) 
+        {
+            $cart[$id]--;
+        } else 
+        {
+            unset($cart[$id]);
+        }
+        
+        return $session->set('cart', $cart);
+    }
+
+
 }

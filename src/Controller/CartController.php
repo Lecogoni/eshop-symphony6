@@ -24,14 +24,18 @@ class CartController extends AbstractController
             ];
         }
 
-        if (count($cartProduct) > 0)
-        {
+        
+        // Check if there is items in the cart
+        // if $cartProduct is empty redirect to Product else redirect to the cart page
+
+        // if (count($cartProduct) > 0)
+        // {
+        // } else {
+        //     return $this->redirectToRoute('app_products');
+        // }
             return $this->render('cart/index.html.twig', [
                 'cart' => $cartProduct
             ]);
-        } else {
-            return $this->redirectToRoute('app_products');
-        }
     }
     
     /**
@@ -66,6 +70,16 @@ class CartController extends AbstractController
     public function delete(Cart $cart, $id)
     {
         $cart->delete($id);
+        return $this->redirectToRoute('app_cart');
+    }
+
+     /**
+     * decrease product quantity in cart
+     */
+    #[Route('/cart/decrease/{id}', name: 'app_cart_decrease')]
+    public function deleteOne(Cart $cart, $id)
+    {
+        $cart->decrease($id);
         return $this->redirectToRoute('app_cart');
     }
 

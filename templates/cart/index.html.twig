@@ -10,43 +10,47 @@
     Retrouvez l'ensemble des produits placés dans votre panier
 
     {% if cart|length > 0 %}
-    <table class="table">
-        <thead>
-            <tr>
-                <th scope="col">Produits</th>
-                <th scope="col"></th>
-                <th scope="col">Quantité</th>
-                <th scope="col">Prix unitaire</th>
-                <th scope="col">Prix</th>
-                <th scope="col"></th>
-            </tr>
-        </thead>
-        <tbody>
-            {% set total = null %}
-            {% for item in cart %}
-            <tr>
-                <th scope="row">
-                    <img src="uploads/{{item.product.illustration}}" alt="{{ item.product.name }}" height="60px">
-                </th>
-                <th>{{item.product.name}}<br><small>{{item.product.subtitle}}</small></th>
-                <td>x {{item.quantity}}</td>
-                <td>{{ (item.product.price / 100) | number_format(2, ',', '.')}} €</td>
-                <td>{{ ((item.quantity * item.product.price) / 100) | number_format(2, ',', '.')}} €</td>
-                <td>
-                    <a href="{{ path('app_cart_delete', {'id' : item.product.id }) }}"><img src="{{ asset('images/trash-can.png')}}" height="18px" alt"supprimer mon produit"></a>
-                </td>
-            </tr>
-            {% set total = total + (item.quantity * item.product.price) %}
-            {% endfor %}
-        </tbody>
-    </table>
+        <table class="table">
+            <thead>
+                <tr>
+                    <th scope="col">Produits</th>
+                    <th scope="col"></th>
+                    <th scope="col">Quantité</th>
+                    <th scope="col">Prix unitaire</th>
+                    <th scope="col">Prix</th>
+                    <th scope="col"></th>
+                </tr>
+            </thead>
+            <tbody>
+                {% set total = null %}
+                {% for item in cart %}
+                    <tr>
+                        <th scope="row">
+                            <img src="uploads/{{item.product.illustration}}" alt="{{ item.product.name }}" height="60px">
+                        </th>
+                        <th>{{item.product.name}}<br><small>{{item.product.subtitle}}</small></th>
+                        <td>
+                            <a href="{{ path('app_cart_decrease', {'id' : item.product.id }) }}"><img src="{{ asset ('images/minus.png') }}" alt="enlever" height="14px" class="me-2"></a>
+                            {{item.quantity}}
+                            <a href="{{ path('app_cart_add', {'id' : item.product.id }) }}"><img src="{{ asset ('images/add.png') }}" alt="ajouter un produit" height="14px" class="ms-2"></a>
+                        </td>
+                        <td>{{ (item.product.price / 100) | number_format(2, ',', '.')}} €</td>
+                        <td>{{ ((item.quantity * item.product.price) / 100) | number_format(2, ',', '.')}} €</td>
+                        <td>
+                            <a href="{{ path('app_cart_delete', {'id' : item.product.id }) }}"><img src="{{ asset('images/trash-can.png')}}" height="18px" alt"supprimer mon produit"></a>
+                        </td>
+                    </tr>
+                {% set total = total + (item.quantity * item.product.price) %}
+                {% endfor %}
+            </tbody>
+        </table>
 
-    <div class='text-end'>
-        Nombre de produits : {{cart|length}}<br>
-        <b>Total de votre panier : {{ (total / 100) | number_format(2, ',', '.')}} €</b><br>
-        <a href="" class"btn btn-primary">Valider mon panier</a>
-        <a href="{{ path('app_cart_remove') }}" class"btn btn-primary">Supprimer tout mon panier</a>
-    </div>
+        <div class='text-end'>
+            Nombre de produits : {{cart|length}}<br>
+            <b>Total de votre panier : {{ (total / 100) | number_format(2, ',', '.')}} €</b><br><br>
+            <a href="" class="btn btn-success col-12">Valider mon panier</a><br><br>
+            <a href="{{ path('app_cart_remove')}}" class="btn btn-danger">Supprimer tout mon panier</a>
+        </div>
     {% else %}
         <hr>
         <p><b>Votre panier est vide</b><p>
@@ -54,6 +58,8 @@
 </div>
 {% endblock %}
 
-{# <i class="fa-solid fa-trash-can"></i>
+{# 
+<i class="fa-solid fa-trash-can"></i>
 <i class="fa-solid fa-plus"></i>
-<i class="fa-solid fa-minus"></i> #}
+<i class="fa-solid fa-minus"></i> 
+#}
