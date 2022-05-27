@@ -14,9 +14,6 @@ class CartController extends AbstractController
     #[Route('/cart', name: 'app_cart')]
     public function index(Cart $cart, ProductRepository $ProductRepository )
     {
-
-
-        
         // Check if there is items in the cart
         // if $cartProduct is empty redirect to Product else redirect to the cart page
 
@@ -31,7 +28,6 @@ class CartController extends AbstractController
         ]);
     }
     
-
 
     /**
      * add to cart
@@ -63,7 +59,7 @@ class CartController extends AbstractController
 
 
      /**
-     * delte one product in cart by its id
+     * delete one product in cart by its id
      */
     #[Route('/cart/delete/{id}', name: 'app_cart_delete')]
     public function delete(Cart $cart, $id)
