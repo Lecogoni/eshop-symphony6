@@ -3,16 +3,18 @@
 
 namespace App\Classe;
 
-
+use App\Repository\ProductRepository;
 use Symfony\Component\HttpFoundation\RequestStack;
 
 class Cart
 {
     private $requestStack;
+    private $ProductRepository;
 
-    public function __construct(RequestStack $requestStack)
+    public function __construct(RequestStack $requestStack, ProductRepository $ProductRepository)
     {
         $this->requestStack = $requestStack;
+        $this->ProductRepository = $ProductRepository;
     }
     
     /**
@@ -86,4 +88,20 @@ class Cart
     }
 
 
+    public function getCartAndProducts(){
+
+        $cartProduct = [];
+
+        if ($this->get()){
+            foreach ($this->get() as $id => $quantity)
+            {
+                $cartProduct[] = [
+                    'product' => $this->ProductRepository->find($id),
+                    'quantity' => $quantity
+                ];
+            }
+        }
+
+        return $cartProduct;
+    }
 }

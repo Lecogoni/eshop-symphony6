@@ -14,15 +14,7 @@ class CartController extends AbstractController
     #[Route('/cart', name: 'app_cart')]
     public function index(Cart $cart, ProductRepository $ProductRepository )
     {
-        $cartProduct = [];
 
-        foreach ($cart->get() as $id => $quantity)
-        {
-            $cartProduct[] = [
-                'product' => $ProductRepository->find($id),
-                'quantity' => $quantity
-            ];
-        }
 
         
         // Check if there is items in the cart
@@ -33,11 +25,14 @@ class CartController extends AbstractController
         // } else {
         //     return $this->redirectToRoute('app_products');
         // }
-            return $this->render('cart/index.html.twig', [
-                'cart' => $cartProduct
-            ]);
+        
+        return $this->render('cart/index.html.twig', [
+            'cart' => $cart->getCartAndProducts()
+        ]);
     }
     
+
+
     /**
      * add to cart
      */
@@ -53,6 +48,8 @@ class CartController extends AbstractController
         return $this->redirectToRoute('app_cart');
     }
 
+
+
      /**
      * remove cart
      */
@@ -63,6 +60,8 @@ class CartController extends AbstractController
         return $this->redirectToRoute('app_products');
     }
 
+
+
      /**
      * delte one product in cart by its id
      */
@@ -72,6 +71,9 @@ class CartController extends AbstractController
         $cart->delete($id);
         return $this->redirectToRoute('app_cart');
     }
+
+
+
 
      /**
      * decrease product quantity in cart
