@@ -50,7 +50,7 @@ class DashboardController extends AbstractDashboardController
         yield MenuItem::linkToCrud('User', 'fas fa-user', User::class);
         yield MenuItem::linkToCrud('Category', 'fa-solid fa-tag', Category::class);
         yield MenuItem::linkToCrud('Product', 'fa-solid fa-shirt', Product::class);
-        yield MenuItem::linkToCrud('Transporteur', 'fa-solid fa-truck-fast', Carrier::class);
+        yield MenuItem::linkToCrud('carrier', 'fa-solid fa-truck-fast', Carrier::class);
         yield MenuItem::linkToLogout('Logout', 'fa-solid fa-right-from-bracket');
         //yield MenuItem::linkToRoute('app_register', 'fa fa-exit');
     }
