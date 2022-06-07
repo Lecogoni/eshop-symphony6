@@ -48,7 +48,7 @@
         <div class='text-end'>
             Nombre de produits : {{cart|length}}<br>
             <b>Total de votre panier : {{ (total / 100) | number_format(2, ',', '.')}} €</b><br><br>
-            <a href="" class="btn btn-success col-12">Valider mon panier</a><br><br>
+            <a href="{{ path('app_order')}}" class="btn btn-success col-12">Valider mon panier</a><br><br>
             <a href="{{ path('app_cart_remove')}}" class="btn btn-danger">Supprimer tout mon panier</a>
         </div>
     {% else %}
