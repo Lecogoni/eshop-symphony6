@@ -14,3 +14,7 @@
 ### Manage Admin 
 
 - easyadmin-bundle (v4.2.2)
+
+### Test 
+
+- PHPUnit v9
