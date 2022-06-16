@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Classe\Cart;
 use App\Entity\Address;
 use App\Form\AddressType;
 use Doctrine\ORM\EntityManagerInterface;
@@ -28,7 +29,7 @@ class AccountAddressController extends AbstractController
      * User add a new expedition addresse
      */
     #[Route('/account/address-new', name: 'app_account_address_add')]
-    public function add(Request $request): Response
+    public function add(Cart $cart, Request $request): Response
     {
         // préparation du form
         $addresse = new Address();
@@ -42,9 +43,18 @@ class AccountAddressController extends AbstractController
 
             $this->entityManager->persist($addresse); // creation de la requete pour persister le new user
             $this->entityManager->flush();
-            return $this->redirectToRoute('app_account_address');
+            // when user having no addresse want to check its cart he is redirect to creaate an addresse page
+            // so after creating it, if he has a cart we redirect to it else to accoutn address management
+            
+            if ($cart->get()) {
+                return $this->redirectToRoute('app_order');
+            } else {
+               return $this->redirectToRoute('app_account_address');
+            }
         }
 
+        
+        
         return $this->render('account/address-form.html.twig', [
             'form' => $form->createView()
         ]);
