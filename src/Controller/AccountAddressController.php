@@ -43,9 +43,9 @@ class AccountAddressController extends AbstractController
 
             $this->entityManager->persist($addresse); // creation de la requete pour persister le new user
             $this->entityManager->flush();
+
             // when user having no addresse want to check its cart he is redirect to creaate an addresse page
             // so after creating it, if he has a cart we redirect to it else to accoutn address management
-            
             if ($cart->get()) {
                 return $this->redirectToRoute('app_order');
             } else {
