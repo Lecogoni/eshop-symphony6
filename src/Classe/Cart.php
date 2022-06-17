@@ -93,10 +93,19 @@ class Cart
         $cartProduct = [];
 
         if ($this->get()){
+
             foreach ($this->get() as $id => $quantity)
             {
+                $product_object = $this->ProductRepository->find($id);
+
+                if(!$product_object)
+                {
+                    $this->delete($id);
+                    continue;
+                }
+                
                 $cartProduct[] = [
-                    'product' => $this->ProductRepository->find($id),
+                    'product' => $product_object,
                     'quantity' => $quantity
                 ];
             }

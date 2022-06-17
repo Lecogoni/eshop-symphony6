@@ -14,11 +14,30 @@
                 {{ form(form) }}
             {% endset %}
             {{ formHtml|replace({'[br]' : '<br>'})|raw}}
-            <hr>
-            <b>choisir mon transporteur</b>
         </div>
         <div class="col-md-6">
-            <b>recap de ma commande</b><br>
+            <h4>Recap de ma commande</h4>
+            {% set total = null %}
+             <table class="table">
+                {% for item in cart %}
+                        <tr>
+                            <th scope="row">
+                                <img src="uploads/{{item.product.illustration}}" alt="{{ item.product.name }}" height="60px">
+                            </th>
+                            <th>{{item.quantity}} {{item.product.name}}</th>
+                            <td>{{ ((item.quantity * item.product.price) / 100) | number_format(2, ',', '.')}} €</td>
+                        </tr>
+                    {% set total = total + (item.quantity * item.product.price) %}
+                {% endfor %}
+            </table>
+            <div class='text-end'>
+                Nombre de produits : {{cart|length}}<br>
+                <b>Total de votre panier : {{ (total / 100) | number_format(2, ',', '.')}} €</b><br><br>
+                <a href="{{ path('app_order')}}" class="btn btn-success col-12">Payer</a><br><br>
+                <a href="{{ path('app_cart')}}" class="btn btn-info">modifier mon panier</a>
+            </div>
+
+            <br>
             <b>bouton pour payer</b>
         </div>
     </div>
