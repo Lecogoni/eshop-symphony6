@@ -11,7 +11,8 @@
         <div class="col-md-6">
             {# form choose carrier #}
             {% set formHtml %}
-                {{ form(form) }}
+                {{ form_start(form, {action:path('app_order_summary')}) }}
+                {{ form_end(form) }}
             {% endset %}
             {{ formHtml|replace({'[br]' : '<br>'})|raw}}
         </div>
@@ -33,7 +34,6 @@
             <div class='text-end'>
                 Nombre de produits : {{cart|length}}<br>
                 <b>Total de votre panier : {{ (total / 100) | number_format(2, ',', '.')}} €</b><br><br>
-                <a href="{{ path('app_order')}}" class="btn btn-success col-12">Payer</a><br><br>
                 <a href="{{ path('app_cart')}}" class="btn btn-info">modifier mon panier</a>
             </div>
 
